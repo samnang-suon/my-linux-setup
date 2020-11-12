@@ -172,9 +172,10 @@ function install_7zip() {
 # 	source: https://askubuntu.com/questions/470966/shortcut-to-clear-command-line-terminal
 ###################################################################################################
 function bash_useful_keyboard_shortcuts() {
-	echo "Shift+Ctrl+T: Open a new tab."
-	echo "Shift+Ctrl+W: Close the current tab."
-	echo "Ctrl+Page Up: Switch to the previous tab."
-	echo "Ctrl+U: clear all the current line from the end to the beginning."
+	echo "Shift+Ctrl+T:		Open a new tab."
+	echo "Shift+Ctrl+W:		Close the current tab."
+	echo "Ctrl+Page Up: 	Switch to the previous tab."
+	echo "Ctrl+U:			clear all the current line from the end to the beginning."
+	echo "Ctrl+K:			clear all the current line from the beginning to the end."
 }
 
