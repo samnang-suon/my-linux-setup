@@ -99,7 +99,8 @@ function list_npm_global_installed_packages() {
 
 function install_postman() {
 	#	To install POSTMAN
-	#	search in Ubuntu Software STore
+	#	search in Ubuntu Software Store
+	echo "Add echo statement because cannot leave function empty..."
 }
 
 
@@ -161,6 +162,7 @@ function install_7zip() {
 	#	sudo apt remove p7zip --yes
 
 	# Personally, I do not like this program
+	echo "Add echo statement because cannot leave function empty..."
 }
 
 
@@ -181,4 +183,14 @@ function bash_useful_keyboard_shortcuts() {
 	# BASH CHEAT SHEET
 	# source: https://devhints.io/bash
 }
+
+
+###################################################################################################
+# MAIN FUNCTION
+# source: https://unix.stackexchange.com/questions/550771/sourced-bash-script-each-with-main-function
+###################################################################################################
+main() {
+	echo "Hello World !"
+}
+main "$@"
 
