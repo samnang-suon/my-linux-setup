@@ -235,6 +235,13 @@ function apt_vs_apt-get() {
 	#	apt show	    | apt-cache show	    | Shows package details
 	echo "Apt vs Apt-Get"
 }
+
+
+
+
+###################################################################################################
+#	ORACLE-RELATED
+###################################################################################################
 function install_oracle_database() {
 	# 	Link to download ORACLE DATABASE FOR LINUX
 	# 	https://www.oracle.com/database/technologies/xe-prior-releases.html
@@ -254,6 +261,21 @@ function install_oracle_database() {
 	sudo apt update
 	sudo apt install alien --yes
 	sudo alien --install packagename.rpm
+}
+function install_oracle_sql_plus() {
+	# Download RPM files:
+	# 1. Basic Light Package (RPM)
+	# 2. SQL*Plus Package (RPM)
+	# from:
+	# https://www.oracle.com/database/technologies/instant-client/linux-x86-64-downloads.html
+
+	cd ~/Download
+	sudo mkdir /opt/oracle
+	sudo mv *instantclient* /opt/oracle
+	cd /opt/oracle
+	sudo alien --install basic-client.rpm
+	sudo alien --install sql-plus.rpm
+
 }
 function install_oracle_sql_developer() {
 	# Download RPM file from:
