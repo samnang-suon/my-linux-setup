@@ -122,18 +122,6 @@ function install_java() {
 
 
 ###################################################################################################
-#	LINUX-RELATED
-###################################################################################################
-function list_linux_installed_packages() {
-	#	list installed packages
-	#	source: https://www.cyberciti.biz/faq/apt-get-list-packages-are-installed-on-ubuntu-linux/
-	sudo apt list --installed
-}
-
-
-
-
-###################################################################################################
 #	DOCKER-RELATED
 #	source: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04
 ###################################################################################################
@@ -159,7 +147,7 @@ function install_7zip() {
 	#	ARCHIVE FILES
 	#	sudo apt-get install p7zip-full --yes
 	#	To uninstall
-	#	sudo apt remove p7zip --yes
+	#	sudo apt-get autoremove p7zip --yes
 
 	# Personally, I do not like this program
 	echo "Add echo statement because cannot leave function empty..."
@@ -183,6 +171,21 @@ function bash_useful_keyboard_shortcuts() {
 	# BASH CHEAT SHEET
 	# source: https://devhints.io/bash
 }
+###################################################################################################
+#	LINUX-RELATED
+###################################################################################################
+function list_linux_installed_packages() {
+	#	list installed packages
+	#	source: https://www.cyberciti.biz/faq/apt-get-list-packages-are-installed-on-ubuntu-linux/
+	sudo apt list --installed
+}
+function remove_vs_autoremove() {
+	# see:
+	# https://superuser.com/questions/398670/when-would-you-use-apt-get-remove-over-apt-get-autoremove/668406
+	echo "Remove vs Autoremove"
+}
+
+
 
 
 ###################################################################################################
