@@ -151,13 +151,17 @@ function install_docker_ce() {
 
 
 
-/**************************************************************************************************
-					ZIP-RELATED
-**************************************************************************************************/
-// ARCHIVE FILES
-// sudo apt-get install p7zip-full --yes
+###################################################################################################
+#	ZIP-RELATED
+###################################################################################################
+function install_7zip() {
+	#	ARCHIVE FILES
+	#	sudo apt-get install p7zip-full --yes
+	#	To uninstall
+	#	sudo apt remove p7zip --yes
 
-// sudo apt remove p7zip --yes
+	# Personally, I do not like this program
+}
 
 
 
