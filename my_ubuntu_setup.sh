@@ -184,6 +184,20 @@ function remove_vs_autoremove() {
 	# https://superuser.com/questions/398670/when-would-you-use-apt-get-remove-over-apt-get-autoremove/668406
 	echo "Remove vs Autoremove"
 }
+function apt_vs_apt-get() {
+	# see:
+	# https://itsfoss.com/apt-vs-apt-get-difference
+	#	apt install	    | apt-get install       | Installs a package
+	#	apt remove	    | apt-get remove	    | Removes a package
+	#	apt purge	    | apt-get purge	        | Removes package with configuration
+	#	apt update	    | apt-get update	    | Refreshes repository index
+	#	apt upgrade	    | apt-get upgrade	    | Upgrades all upgradable packages
+	#	apt autoremove	| apt-get autoremove	| Removes unwanted packages
+	#	apt full-upgrade| apt-get dist-upgrade	| Upgrades packages with auto-handling of dependencies
+	#	apt search	    | apt-cache search	    | Searches for the program
+	#	apt show	    | apt-cache show	    | Shows package details
+	echo "Apt vs Apt-Get"
+}
 
 
 
