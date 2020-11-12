@@ -235,7 +235,7 @@ function apt_vs_apt-get() {
 	#	apt show	    | apt-cache show	    | Shows package details
 	echo "Apt vs Apt-Get"
 }
-function oracle_temp_account() {
+function install_oracle_database() {
 	# 	Link to download ORACLE DATABASE FOR LINUX
 	# 	https://www.oracle.com/database/technologies/xe-prior-releases.html
 	#	Oracle Account
@@ -254,6 +254,10 @@ function oracle_temp_account() {
 	sudo apt update
 	sudo apt install alien --yes
 	sudo alien --install <packagename.rpm>
+}
+function install_oracle_sql_developer() {
+	# source: https://www.oracle.com/tools/downloads/sqldev-downloads.html
+	echo "Add echo statement because cannot leave function empty..."
 }
 
 
