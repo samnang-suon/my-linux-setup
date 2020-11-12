@@ -451,13 +451,13 @@ main() {
 	echo "================================================================================"
 	echo "============================== LIST SOFTWARE VERSION ==========================="
 	echo "================================================================================"
-	echo ">>> JAVA:"
+	printf "\n\n>>> JAVA:\n"
 	java --version
-	echo ">>> GIT:"
+	printf "\n\n>>> GIT:\n"
 	git --version
-	echo ">>> NODE:"
+	printf "\n\n>>> NODE:\n"
 	node --version
-	echo ">>> NPM:"
+	printf "\n\n>>> NPM:\n"
     npm --version
 }
 main "$@"
