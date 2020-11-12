@@ -426,10 +426,8 @@ main() {
 	echo "================================================================================"
 	echo "============================== Installing NODE_JS =============================="
 	echo "================================================================================"
-	# sudo apt install nodejs --yes
-	# sudo apt install npm --yes
-	# BETTER INSTALL FROM NODE_JS WEBSITE
-	# BECAUSE IT ERASES UBUNTU SOFTWARE STORE FOR SOME REASON...
+	sudo apt install nodejs --yes
+	sudo apt install npm --yes
 
 
 	echo "================================================================================"
