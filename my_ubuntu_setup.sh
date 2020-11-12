@@ -235,6 +235,26 @@ function apt_vs_apt-get() {
 	#	apt show	    | apt-cache show	    | Shows package details
 	echo "Apt vs Apt-Get"
 }
+function oracle_temp_account() {
+	# 	Link to download ORACLE DATABASE FOR LINUX
+	# 	https://www.oracle.com/database/technologies/xe-prior-releases.html
+	#	Oracle Account
+	#	username:	malege9774@0335g.com
+	#	password:	13579SPACExploration
+
+
+	# How to install a deb file
+	# source: https://unix.stackexchange.com/questions/159094/how-to-install-a-deb-file-by-dpkg-i-or-by-apt
+	sudo apt install /path/to/package/name.deb
+
+
+	# How to install a rpm file
+	# source: https://phoenixnap.com/kb/install-rpm-packages-on-ubuntu
+	sudo add-apt-repository universe
+	sudo apt update
+	sudo apt install alien --yes
+	sudo alien --install <packagename.rpm>
+}
 
 
 
@@ -257,4 +277,6 @@ main() {
 	sudo apt upgrade --yes
 }
 main "$@"
+
+
 
