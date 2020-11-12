@@ -90,6 +90,11 @@ function enable_git_credential_helper() {
 #	USEFUL NPM COMMANDS
 #	For more info: https://docs.npmjs.com/cli/v6/commands
 ###################################################################################################
+function npm_tutorial() {
+	# see:
+	# https://nodejs.dev/learn/an-introduction-to-the-npm-package-manager
+	echo "Add echo statement because cannot leave function empty..."
+}
 function list_npm_installed_packages() {
 	#	Get List of Globally Installed Packages
 	#	source: https://www.dariawan.com/tutorials/javascript/npm-get-list-globally-installed-packages/
@@ -124,6 +129,10 @@ function manage_npm_packages() {
 	npm outdated --local --depth 0
 	# OR
 	# npm outdated --global --depth 0 && npm outdated --local --depth 0
+}
+function update_npm() {
+	# source: https://www.sitepoint.com/npm-guide/
+	sudo npm install --global npm@latest
 }
 function install_postman() {
 	#	To install POSTMAN
