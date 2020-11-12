@@ -28,6 +28,8 @@ function update_mysql_policy() {
 	#	https://stackoverflow.com/questions/43094726/your-password-does-not-satisfy-the-current-policy-requirements
 	sudo mysql -u root -p
 	#	enter password
+
+
 	SHOW VARIABLES LIKE 'validate_password%';
 	SET GLOBAL validate_password.length = 8;
 	SET GLOBAL validate_password.mixed_case_count = 0;
@@ -35,6 +37,34 @@ function update_mysql_policy() {
 	SET GLOBAL validate_password.policy = low;
 	SET GLOBAL validate_password.special_char_count = 0;
 	SHOW VARIABLES LIKE 'validate_password%';
+
+	# If the above shows
+	# Empty set (0.00 sec)
+	# Change root authentication_string from 'auth_socket' to 'mysql_native_password'
+	# source: https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-18-04
+	SELECT user,authentication_string,plugin,host FROM mysql.user;
+	ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
+	FLUSH PRIVILEGES;
+	exit;
+
+
+	# To protect ourself from the following error
+	# An AppArmor policy prevents this sender from sending this message to this recipient;
+	# type="method_call", sender=":1.125" (uid=1000 pid=7944 comm="/snap/mysql-workbench-community/5/usr/bin/mysql- wo"
+	# label="snap.mysql-workbench-community.mysql-workbench- community (enforce)")
+	# interface="org.freedesktop.Secret.Service" member="OpenSession” error name="(unset)"
+	# requested_reply="0" destination=":1.13" (uid=1000 pid=2044 comm="/usr/bin/gnome-
+	# keyring-daemon –daemonize –login" label="unconfined")
+	# source: https://askubuntu.com/questions/1144497/how-to-disable-apparmor-for-mysql
+	# source: https://superuser.com/questions/282115/how-to-restart-mysql
+	# sudo /etc/init.d/mysql stop
+	# sudo ln -s /etc/apparmor.d/usr.sbin.mysqld /etc/apparmor.d/disable/
+	# sudo apparmor_parser -R /etc/apparmor.d/usr.sbin.mysqld
+	# sudo /etc/init.d/mysql restart
+	# sudo /etc/init.d/mysql status
+	# BEST SOLUTION
+	# source: https://itectec.com/ubuntu/ubuntu-cannot-connect-mysql-workbench-to-mysql-server/
+	sudo snap connect mysql-workbench-community:password-manager-service :password-manager-service
 }
 function create_a_new_database_user() {
 	echo "CREATING A NEW USER"
@@ -43,7 +73,7 @@ function create_a_new_database_user() {
 	sudo mysql -u root -p
 	# enter password
 	CREATE USER 'admin'@'localhost' IDENTIFIED BY 'password';
-	GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' WITH GRANT OPTION;	
+	GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' WITH GRANT OPTION;
 }
 
 
