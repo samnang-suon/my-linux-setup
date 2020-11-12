@@ -314,7 +314,16 @@ function install_oracle_sql_plus() {
 	cd /opt/oracle
 	sudo alien --install basic-client.rpm
 	sudo alien --install sql-plus.rpm
-	
+
+
+	# Create tnsnames.ora
+	# source: https://mkyong.com/jdbc/ora-12505-tnslistener-does-not-currently-know-of-sid-given-in-connect-descriptor/
+	# source: https://www.ibm.com/support/knowledgecenter/en/SSBNJ7_1.4.1/oracle/ttnpm_ora_createtnsnamesorafile.html
+	cd /usr/lib/oracle/19.9/client64/lib/network/admin
+	sudo touch tnsnames.ora
+	copy-paste the config from website
+	save the changes
+
 
 	# To protect ourself from the following error:
 	# sqlplus: error while loading shared libraries: libsqlplus.so: cannot open shared object file: No such file or directory
@@ -326,7 +335,9 @@ function install_oracle_sql_plus() {
 
 	# Create database users
 	# source: https://stackoverflow.com/questions/18192521/ora-12505-tnslistener-does-not-currently-know-of-sid-given-in-connect-descript
-	sqlplus system/system-password@XE
+	# sqlplus system/system-password@XE
+	# source: https://chartio.com/resources/tutorials/how-to-fix-ora-12505-tns-listener-does-not-currently-know-of-sid-given-in-connect-descriptor/
+	sqlplus username/password@host:port:SID
 	create user USERNAME identified by PASSWORD;
 	alter database open resetlogs;
 	grant connect, resource to USERNAME;
@@ -341,6 +352,8 @@ function install_oracle_sql_developer() {
 
 	# to launch app see:
 	# source: https://dev.to/ishakantony/how-to-install-oracle-sql-developer-on-ubuntu-20-04-3jpd
+	# source: https://mariadb.com/kb/en/oracle-xe-112-and-mariadb-101-integration-on-ubuntu-1404-and-debian-systems/
+	export ORACLE_SID=xe
 	cd /opt/sqldeveloper
 	sudo chmod 777 sqldeveloper.sh
 	./sqldeveloper.sh
