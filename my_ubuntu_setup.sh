@@ -57,28 +57,31 @@ function create_a_new_database_user() {
 
 
 
+###################################################################################################
+#	GIT-RELATED
+#	for more info: https://www.digitalocean.com/community/tutorials/how-to-install-git-on-ubuntu-18-04
+###################################################################################################
+function install_git() {
+	#	source from:
+	#	https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup
+	sudo apt-get update --yes
+	sudo apt-get install git --yes
+	git --version
+	git config --list --global
+}
 
-/**************************************************************************************************
-					GIT-RELATED
-for more info: https://www.digitalocean.com/community/tutorials/how-to-install-git-on-ubuntu-18-04
-**************************************************************************************************/
-// To install GIT
-// source from:
-// https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup
-1. sudo apt-get update --yes
-2. sudo apt-get install git --yes
-3. git --version
-4. git config --list --global
 
+function enable_git_credential_helper() {
+	#	How to fix Git always asking for user credentials
+	#	source from:
+	#	https://www.freecodecamp.org/news/how-to-fix-git-always-asking-for-user-credentials/
+	git config --global credential.helper store
 
-// How to fix Git always asking for user credentials
-// source from:
-// https://www.freecodecamp.org/news/how-to-fix-git-always-asking-for-user-credentials/
-1. git config --global credential.helper store
+	#	TO REMOVE CREDENTIALS
+	#	source from: https://stackoverflow.com/questions/15381198/remove-credentials-from-git
+	#	git config --global --unset credential.helper
+}
 
-//  TO REMOVE CREDENTIALS
-// source from: https://stackoverflow.com/questions/15381198/remove-credentials-from-git
- git config --global --unset credential.helper
 
 
 
