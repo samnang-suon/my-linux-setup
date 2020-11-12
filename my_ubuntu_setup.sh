@@ -22,32 +22,38 @@ function connect_to_mysql_database() {
 }
 
 
-
-// To install MYSQL WORKBENCH
-1. Go to Ubuntu App Store (Ubuntu Software)
-
-
-// UPDATE MYSQL POLICY REQUIREMENT
-// source from:
-// https://stackoverflow.com/questions/43094726/your-password-does-not-satisfy-the-current-policy-requirements
-1. sudo mysql -u root -p
-2. enter password
-3. SHOW VARIABLES LIKE 'validate_password%';
-4. SET GLOBAL validate_password.length = 8;
-5. SET GLOBAL validate_password.mixed_case_count = 0;
-6. SET GLOBAL validate_password.number_count = 0;
-7. SET GLOBAL validate_password.policy = low;
-8. SET GLOBAL validate_password.special_char_count = 0;
-9. SHOW VARIABLES LIKE 'validate_password%';
+function install_mysql_workbench() {
+	echo "To install MYSQL WORKBENCH"
+	echo "Go to Ubuntu App Store (Ubuntu Software)"
+}
 
 
-// CREATE A NEW USER
-// source from:
-// https://askubuntu.com/questions/773446/unable-to-connect-via-mysql-workbench-to-localhost-in-ubuntu-16-04-passwordless
-1. sudo mysql -u root -p
-2. enter password
-3. CREATE USER 'admin'@'localhost' IDENTIFIED BY 'password';
-4. GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' WITH GRANT OPTION;
+function update_mysql_policy() {
+	echo "RUNNING UPDATE MYSQL POLICY REQUIREMENT"
+	#	source from:
+	#	https://stackoverflow.com/questions/43094726/your-password-does-not-satisfy-the-current-policy-requirements
+	sudo mysql -u root -p
+	#	enter password
+	SHOW VARIABLES LIKE 'validate_password%';
+	SET GLOBAL validate_password.length = 8;
+	SET GLOBAL validate_password.mixed_case_count = 0;
+	SET GLOBAL validate_password.number_count = 0;
+	SET GLOBAL validate_password.policy = low;
+	SET GLOBAL validate_password.special_char_count = 0;
+	SHOW VARIABLES LIKE 'validate_password%';
+}
+
+
+function create_a_new_database_user() {
+	echo "CREATING A NEW USER"
+	#	source from:
+	#	https://askubuntu.com/questions/773446/unable-to-connect-via-mysql-workbench-to-localhost-in-ubuntu-16-04-passwordless
+	sudo mysql -u root -p
+	# enter password
+	CREATE USER 'admin'@'localhost' IDENTIFIED BY 'password';
+	GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' WITH GRANT OPTION;	
+}
+
 
 
 
