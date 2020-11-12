@@ -429,7 +429,7 @@ main() {
 	# sudo apt install nodejs --yes
 	# sudo apt install npm --yes
 	# BETTER INSTALL FROM NODE_JS WEBSITE
-	# BECAUSE IT ERASE UBUNTU SOFTWARE STORE FOR SOME REASON...
+	# BECAUSE IT ERASES UBUNTU SOFTWARE STORE FOR SOME REASON...
 
 
 	echo "================================================================================"
