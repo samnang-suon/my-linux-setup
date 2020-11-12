@@ -1,26 +1,26 @@
-/**************************************************************************************************
-									MOST TUTORIALS COME FROM:
-					https://www.digitalocean.com/community/tags/ubuntu-18-04
-**************************************************************************************************/
+###################################################################################################
+#	MOST TUTORIALS COME FROM:
+# 	https://www.digitalocean.com/community/tags/ubuntu-18-04
+###################################################################################################
 
 
-// To install MYSQL
-// source from:
-// https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04
 function install_mysql() {
+	#	To install MYSQL
+	#	source from:
+	#	https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04
+	echo "Running 'install mysql'"
 	sudo apt update
 	sudo apt install mysql-server --yes
-	// 3. sudo mysql_secure_installation
-	// Instead of step #3, just use the usual
-	// username: root
-	// password: root
+	#	sudo mysql_secure_installation
+	#	Instead of using the above step, just use the usual
 }
 
 
+function connect_to_mysql_database() {
+	sudo mysql -u root -p
+	# enter password
+}
 
-// To connect
-1. sudo mysql -u root -p
-2. enter password
 
 
 // To install MYSQL WORKBENCH
