@@ -191,6 +191,8 @@ function bash_useful_keyboard_shortcuts() {
 ###################################################################################################
 main() {
 	echo "Hello World !"
+	echo "Running update"
+	sudo apt-get update
 }
 main "$@"
 
