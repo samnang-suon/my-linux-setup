@@ -106,12 +106,24 @@ function list_npm_installed_packages() {
 }
 function uninstall_npm_project_packages() {
 	# source: https://flaviocopes.com/npm-uninstall-packages
+	# !!! project-specific !!!
 	# For "dependencies" section
 	# npm uninstall --save <package-name>
 	########## ########## ########## ########## ##########
 	# For "devDependencies" section
 	# npm uninstall --save-dev <package_name>
 	echo "Add echo statement because cannot leave function empty..."
+}
+function manage_npm_packages() {
+	# source: https://www.toptal.com/javascript/a-guide-to-npm-the-node-package-manager
+	# !!! project-specific !!!
+	npm outdated
+
+	# !!! global scope !!!
+	npm outdated --global --depth 0
+	npm outdated --local --depth 0
+	# OR
+	# npm outdated --global --depth 0 && npm outdated --local --depth 0
 }
 function install_postman() {
 	#	To install POSTMAN
