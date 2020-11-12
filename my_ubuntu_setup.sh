@@ -105,19 +105,21 @@ function install_postman() {
 
 
 
-/**************************************************************************************************
-					JAVA-RELATED
-**************************************************************************************************/
- // To install JAVA
- // source:
- // https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04
- 1. sudo apt-get update
- 2. sudo apt install default-jdk --yes
- 3. java --version
- 
- 
- 
- 
+###################################################################################################
+#	JAVA-RELATED
+###################################################################################################
+function install_java() {
+	#To install JAVA
+	#	source:
+	#	https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-on-ubuntu-18-04
+	sudo apt-get update
+	sudo apt install default-jdk --yes
+	java --version
+}
+
+
+
+
 /**************************************************************************************************
 					Linux-RELATED
 **************************************************************************************************/
