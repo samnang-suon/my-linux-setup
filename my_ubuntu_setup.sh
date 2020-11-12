@@ -263,42 +263,43 @@ function install_oracle_database() {
 	sudo alien --install packagename.rpm
 
 
-	# User Management
-	# https://www.techrepublic.com/article/how-to-create-users-and-groups-in-linux-from-the-command-line/
-	##### Create dba group
+	# To protect ourself from the following error
+	# /bin/chown: invalid user: 'oracle:dba'
+	##### Create new user
+	sudo adduser oracle
+	##### Create new group
 	sudo groupadd dba
 	##### Add user to DBA group
-	# source: http://sampig.github.io/tutorial/2019/06/17/install-oracle-express-in-ubuntu
-	sudo usermod -a -G dba YOURUSERNAME
+	sudo usermod -a -G dba oracle
+	# solution from: http://sampig.github.io/tutorial/2019/06/17/install-oracle-express-in-ubuntu
+	# solution from: https://www.cyberciti.biz/faq/create-a-user-account-on-ubuntu-linux/
+	# solution from: https://technorattle.wordpress.com/2011/09/06/binchown-invalid-user-oracledba-error-while-reinstalling-oracle-xe-on-ubuntu/
+
+
+	# To protect ourself from the following error:
+	# /bin/chmod: cannot access '/u01/app/oracle/oradata': No such file or directory
+	# /bin/chmod: cannot access '/u01/app/oracle/diag': No such file or directory
+	sudo mkdir /u01/app/oracle/oradata
+	sudo mkdir /u01/app/oracle/diag
+
 
 	# Configure Oracle
 	sudo chmod 777 /etc/init.d/oracle-xe
 	sudo /etc/init.d/oracle-xe configure
 
+
 	# Run service
 	sudo service oracle-xe start
 
-	# Create database users
-	sqlplus sys as sysdba
-	create user USERNAME identified by PASSWORD;
-	alter database open resetlogs;
-	grant connect, resource to USERNAME;
-	exit;
 
-
-	# FULL tutorial
-	# https://www.cyberciti.biz/faq/howto-install-linux-oracle-database-xe-server/
-
-
-	# To reconfigure Oracle XE
-	# source: https://stackoverflow.com/questions/5433118/how-to-reconfigure-oracle-10g-xe-on-linux
-	sublime /etc/default/oracle-xe
-	# Change
-	CONFIGURE_RUN=true
-	# to
-	CONFIGURE_RUN=false
+	# To reconfigure Oracle XE in case you made a mistake
+	# ERROR: ORA-12162: TNS:net service name is incorrectly specified
+	# OR
+	# Oracle Database 11g Express Edition is already configured
+	sudo rm -rf /etc/default/oracle-xe
 	# then
 	sudo /etc/init.d/oracle-xe configure
+	# solution from: https://stackoverflow.com/questions/5433118/how-to-reconfigure-oracle-10g-xe-on-linux
 }
 function install_oracle_sql_plus() {
 	# Download RPM files:
@@ -313,13 +314,23 @@ function install_oracle_sql_plus() {
 	cd /opt/oracle
 	sudo alien --install basic-client.rpm
 	sudo alien --install sql-plus.rpm
-	sqlplus
-	# if you encounter the following error:
+	
+
+	# To protect ourself from the following error:
 	# sqlplus: error while loading shared libraries: libsqlplus.so: cannot open shared object file: No such file or directory
 	# source: https://askubuntu.com/questions/420395/sqlplus-error-while-loading-shared-libraries-libsqlplus-so-cannot-open-shared
 	ls /usr/lib/oracle
 	export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/oracle/19.9/client64/bin:/usr/lib/oracle/19.9/client64/lib
-	sqlplus
+	# Replace '19.9' with your version
+
+
+	# Create database users
+	# source: https://stackoverflow.com/questions/18192521/ora-12505-tnslistener-does-not-currently-know-of-sid-given-in-connect-descript
+	sqlplus system/system-password@XE
+	create user USERNAME identified by PASSWORD;
+	alter database open resetlogs;
+	grant connect, resource to USERNAME;
+	exit;
 
 }
 function install_oracle_sql_developer() {
