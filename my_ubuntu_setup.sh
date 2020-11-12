@@ -244,8 +244,6 @@ function apt_vs_apt-get() {
 # source: https://unix.stackexchange.com/questions/550771/sourced-bash-script-each-with-main-function
 ###################################################################################################
 main() {
-	echo "Hello World !"
-
 	# UPDATE VS UPGRADE
 	# source: https://unix.stackexchange.com/questions/361814/whats-the-difference-between-software-update-and-upgrade
 	echo "================================================================================"
