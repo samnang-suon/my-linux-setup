@@ -120,16 +120,18 @@ function install_java() {
 
 
 
-/**************************************************************************************************
-					Linux-RELATED
-**************************************************************************************************/
-// list installed packages
-// source: https://www.cyberciti.biz/faq/apt-get-list-packages-are-installed-on-ubuntu-linux/
- sudo apt list --installed
- 
- 
- 
- 
+###################################################################################################
+#	LINUX-RELATED
+###################################################################################################
+function list_linux_installed_packages() {
+	#	list installed packages
+	#	source: https://www.cyberciti.biz/faq/apt-get-list-packages-are-installed-on-ubuntu-linux/
+	sudo apt list --installed
+}
+
+
+
+
  /**************************************************************************************************
 					DOCKER-RELATED
 source: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04
