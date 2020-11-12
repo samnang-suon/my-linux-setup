@@ -90,10 +90,19 @@ function enable_git_credential_helper() {
 #	USEFUL NPM COMMANDS
 #	For more info: https://docs.npmjs.com/cli/v6/commands
 ###################################################################################################
-function list_npm_global_installed_packages() {
+function list_npm_installed_packages() {
 	#	Get List of Globally Installed Packages
 	#	source: https://www.dariawan.com/tutorials/javascript/npm-get-list-globally-installed-packages/
-	npm list -g --depth 0
+	npm list --global --depth 0
+	npm list --local --depth 0
+	# OR
+	# npm list --global --depth 0 && npm list --local --depth 0
+
+	# to uninstall package
+	# source: https://flaviocopes.com/npm-uninstall-packages/
+	# sudo npm uninstall --global <package_name>
+	# OR
+	# sudo npm uninstall --local <package_name>
 }
 
 
