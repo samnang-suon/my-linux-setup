@@ -359,6 +359,24 @@ function install_oracle_sql_developer() {
 	./sqldeveloper.sh
 	echo "Add echo statement because cannot leave function empty..."
 }
+function uninstall_oracle() {
+	sudo apt autoremove oracle-instantclient19.9-basiclite --yes
+	sudo apt autoremove oracle-instantclient19.9-sqlplus --yes
+	sudo apt autoremove oracle-xe --yes
+	sudo apt autoremove sqldeveloper --yes
+	sudo rm -rf /u01
+	sudo rm -rf /opt/oracle
+
+	# to list all users:
+	# cat /etc/passwd
+	# OR
+	# ls /home
+
+	# delete oracle user
+	# source: https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-ubuntu-18-04
+	sudo deluser oracle
+	sudo rm -rf /home/oracle
+}
 
 
 
