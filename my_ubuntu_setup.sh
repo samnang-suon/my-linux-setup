@@ -177,5 +177,8 @@ function bash_useful_keyboard_shortcuts() {
 	echo "Ctrl+Page Up: 	Switch to the previous tab."
 	echo "Ctrl+U:			clear all the current line from the end to the beginning."
 	echo "Ctrl+K:			clear all the current line from the beginning to the end."
+
+	# BASH CHEAT SHEET
+	# source: https://devhints.io/bash
 }
 
