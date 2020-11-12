@@ -256,7 +256,16 @@ function install_oracle_database() {
 	sudo alien --install packagename.rpm
 }
 function install_oracle_sql_developer() {
-	# source: https://www.oracle.com/tools/downloads/sqldev-downloads.html
+	# Download RPM file from:
+	# https://www.oracle.com/tools/downloads/sqldev-downloads.html
+
+	# Install RPM file
+
+	# to launch app see:
+	# source: https://dev.to/ishakantony/how-to-install-oracle-sql-developer-on-ubuntu-20-04-3jpd
+	cd /opt/sqldeveloper
+	sudo chmod 777 sqldeveloper.sh
+	./sqldeveloper.sh
 	echo "Add echo statement because cannot leave function empty..."
 }
 
