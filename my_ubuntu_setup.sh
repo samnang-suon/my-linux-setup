@@ -169,10 +169,12 @@ function install_7zip() {
 ###################################################################################################
 #	BASH/TERMINAL-RELATED
 #	source: https://www.howtogeek.com/howto/41418/how-to-be-more-productive-in-ubuntu-using-keyboard-shortcuts/
+# 	source: https://askubuntu.com/questions/470966/shortcut-to-clear-command-line-terminal
 ###################################################################################################
 function bash_useful_keyboard_shortcuts() {
 	echo "Shift+Ctrl+T: Open a new tab."
-	echo "Shift+Ctrl+W Close the current tab."
+	echo "Shift+Ctrl+W: Close the current tab."
 	echo "Ctrl+Page Up: Switch to the previous tab."
+	echo "Ctrl+U: clear all the current line from the end to the beginning."
 }
 
