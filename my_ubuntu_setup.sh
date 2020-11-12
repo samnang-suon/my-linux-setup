@@ -14,20 +14,14 @@ function install_mysql() {
 	#	sudo mysql_secure_installation
 	#	Instead of using the above step, just use the usual
 }
-
-
 function connect_to_mysql_database() {
 	sudo mysql -u root -p
 	# enter password
 }
-
-
 function install_mysql_workbench() {
 	echo "To install MYSQL WORKBENCH"
 	echo "Go to Ubuntu App Store (Ubuntu Software)"
 }
-
-
 function update_mysql_policy() {
 	echo "RUNNING UPDATE MYSQL POLICY REQUIREMENT"
 	#	source from:
@@ -42,8 +36,6 @@ function update_mysql_policy() {
 	SET GLOBAL validate_password.special_char_count = 0;
 	SHOW VARIABLES LIKE 'validate_password%';
 }
-
-
 function create_a_new_database_user() {
 	echo "CREATING A NEW USER"
 	#	source from:
@@ -93,6 +85,7 @@ function enable_git_credential_helper() {
 function install_nodejs_npm() {
     sudo apt install nodejs --yes
     node --version
+	sudo apt install npm --yes
     npm --version
 }
 function npm_tutorial() {
@@ -411,10 +404,61 @@ main() {
 	echo "================================================================================"
 	sudo apt update --yes
 
+
 	echo "================================================================================"
 	echo "============================== Running Upgrade ================================="
 	echo "================================================================================"
 	sudo apt upgrade --yes
+
+
+	echo "================================================================================"
+	echo "============================== Installing JAVA ================================="
+	echo "================================================================================"
+	sudo apt install default-jdk --yes
+
+
+	echo "================================================================================"
+	echo "============================== Installing GIT =================================="
+	echo "================================================================================"
+	sudo apt install git --yes
+
+
+	echo "================================================================================"
+	echo "============================== Installing NODE_JS =============================="
+	echo "================================================================================"
+	sudo apt install nodejs --yes
+	sudo apt install npm --yes
+
+
+	echo "================================================================================"
+	echo "============================== Installing INTELLIJ ============================="
+	echo "================================================================================"
+	sudo snap install intellij-idea-community --classic
+
+
+	echo "================================================================================"
+	echo "============================== Installing WEBSTORM ============================="
+	echo "================================================================================"
+	sudo snap install webstorm --classic
+
+
+	echo "================================================================================"
+	echo "============================== Installing MYSQL ================================"
+	echo "================================================================================"
+	sudo apt install mysql-server --yes
+
+
+	echo "================================================================================"
+	echo "============================== LIST SOFTWARE VERSION ==========================="
+	echo "================================================================================"
+	echo ">>> JAVA:"
+	java --version
+	echo ">>> GIT:"
+	git --version
+	echo ">>> NODE:"
+	node --version
+	echo ">>> NPM:"
+    npm --version
 }
 main "$@"
 
