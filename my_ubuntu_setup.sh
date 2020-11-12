@@ -87,9 +87,14 @@ function enable_git_credential_helper() {
 
 
 ###################################################################################################
-#	USEFUL NPM COMMANDS
+#	NODEJS-RELATED
 #	For more info: https://docs.npmjs.com/cli/v6/commands
 ###################################################################################################
+function install_nodejs_npm() {
+    sudo apt install nodejs --yes
+    node --version
+    npm --version
+}
 function npm_tutorial() {
 	# see:
 	# https://nodejs.dev/learn/an-introduction-to-the-npm-package-manager
