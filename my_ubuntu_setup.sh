@@ -166,10 +166,13 @@ function install_7zip() {
 
 
 
-/**************************************************************************************************
-					BASH/TERMINAL-RELATED
-source: https://www.howtogeek.com/howto/41418/how-to-be-more-productive-in-ubuntu-using-keyboard-shortcuts/
-**************************************************************************************************/
-Shift+Ctrl+T: Open a new tab. 
-Shift+Ctrl+W Close the current tab. 
-Ctrl+Page Up: Switch to the previous tab
+###################################################################################################
+#	BASH/TERMINAL-RELATED
+#	source: https://www.howtogeek.com/howto/41418/how-to-be-more-productive-in-ubuntu-using-keyboard-shortcuts/
+###################################################################################################
+function bash_useful_keyboard_shortcuts() {
+	echo "Shift+Ctrl+T: Open a new tab."
+	echo "Shift+Ctrl+W Close the current tab."
+	echo "Ctrl+Page Up: Switch to the previous tab."
+}
+
