@@ -7,12 +7,15 @@
 // To install MYSQL
 // source from:
 // https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04
-sudo apt update
-sudo apt install mysql-server --yes
-// 3. sudo mysql_secure_installation
-// Instead of step #3, just use the usual
-// username: root
-// password: root
+function install_mysql() {
+	sudo apt update
+	sudo apt install mysql-server --yes
+	// 3. sudo mysql_secure_installation
+	// Instead of step #3, just use the usual
+	// username: root
+	// password: root
+}
+
 
 
 // To connect
