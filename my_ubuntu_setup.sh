@@ -104,8 +104,15 @@ function list_npm_installed_packages() {
 	# OR
 	# sudo npm uninstall --local <package_name>
 }
-
-
+function uninstall_npm_project_packages() {
+	# source: https://flaviocopes.com/npm-uninstall-packages
+	# For "dependencies" section
+	# npm uninstall --save <package-name>
+	########## ########## ########## ########## ##########
+	# For "devDependencies" section
+	# npm uninstall --save-dev <package_name>
+	echo "Add echo statement because cannot leave function empty..."
+}
 function install_postman() {
 	#	To install POSTMAN
 	#	search in Ubuntu Software Store
