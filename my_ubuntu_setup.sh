@@ -89,7 +89,6 @@ function install_git() {
 	sudo apt-get update --yes
 	sudo apt-get install git --yes
 	git --version
-	git config --list --global
 }
 
 
@@ -102,6 +101,11 @@ function enable_git_credential_helper() {
 	#	TO REMOVE CREDENTIALS
 	#	source from: https://stackoverflow.com/questions/15381198/remove-credentials-from-git
 	#	git config --global --unset credential.helper
+}
+function configure_git() {
+	git config --global user.email "samnang.suon.1@ens.etsmtl.ca"
+	git config --global user.name "samnang-suon"
+	git config --list --global
 }
 
 
