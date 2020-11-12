@@ -253,10 +253,23 @@ function install_oracle_database() {
 	sudo add-apt-repository universe
 	sudo apt update
 	sudo apt install alien --yes
-	sudo alien --install <packagename.rpm>
+	sudo alien --install packagename.rpm
 }
 function install_oracle_sql_developer() {
 	# source: https://www.oracle.com/tools/downloads/sqldev-downloads.html
+	echo "Add echo statement because cannot leave function empty..."
+}
+
+
+
+
+###################################################################################################
+# VMWARE-RELATED
+###################################################################################################
+function manage_expand_virtual_disk() {
+	# see:
+	# https://kb.vmware.com/s/article/1004071
+	# I personally recommend GPARTED
 	echo "Add echo statement because cannot leave function empty..."
 }
 
