@@ -467,23 +467,24 @@ function list_software_versions() {
 }
 
 
+function update_ubuntu() {
+	# UPDATE VS UPGRADE
+	# source: https://unix.stackexchange.com/questions/361814/whats-the-difference-between-software-update-and-upgrade
+	echo "================================================================================"
+	echo "============================== UPDATE UBUNTU ==================================="
+	echo "================================================================================"
+	sudo apt update --yes &&
+	sudo apt upgrade --yes &&
+	sudo apt autoremove --yes
+}
+
+
 ###################################################################################################
 # MAIN FUNCTION
 # source: https://unix.stackexchange.com/questions/550771/sourced-bash-script-each-with-main-function
 ###################################################################################################
 main() {
-	# UPDATE VS UPGRADE
-	# source: https://unix.stackexchange.com/questions/361814/whats-the-difference-between-software-update-and-upgrade
-	echo "================================================================================"
-	echo "============================== Running Update =================================="
-	echo "================================================================================"
-	sudo apt update --yes
-
-
-	echo "================================================================================"
-	echo "============================== Running Upgrade ================================="
-	echo "================================================================================"
-	sudo apt upgrade --yes
+	update_ubuntu
 
 
 	echo "================================================================================"
