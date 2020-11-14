@@ -33,6 +33,35 @@ function connect_to_mysql_database() {
 function install_mysql_workbench() {
 	echo "To install MYSQL WORKBENCH"
 	echo "Go to Ubuntu App Store (Ubuntu Software)"
+
+	# Try to open a connection
+
+	# To protect ourself from the following error
+	# An AppArmor policy prevents this sender from sending this message to this recipient;
+	# type="method_call", sender=":1.125" (uid=1000 pid=7944 comm="/snap/mysql-workbench-community/5/usr/bin/mysql- wo"
+	# label="snap.mysql-workbench-community.mysql-workbench- community (enforce)")
+	# interface="org.freedesktop.Secret.Service" member="OpenSession” error name="(unset)"
+	# requested_reply="0" destination=":1.13" (uid=1000 pid=2044 comm="/usr/bin/gnome-
+	# keyring-daemon –daemonize –login" label="unconfined")
+	# source: https://askubuntu.com/questions/1144497/how-to-disable-apparmor-for-mysql
+	# source: https://superuser.com/questions/282115/how-to-restart-mysql
+	# sudo /etc/init.d/mysql stop
+	# sudo ln -s /etc/apparmor.d/usr.sbin.mysqld /etc/apparmor.d/disable/
+	# sudo apparmor_parser -R /etc/apparmor.d/usr.sbin.mysqld
+	# sudo /etc/init.d/mysql restart
+	# sudo /etc/init.d/mysql status
+	# BEST SOLUTION
+	# source: https://itectec.com/ubuntu/ubuntu-cannot-connect-mysql-workbench-to-mysql-server/
+	sudo snap connect mysql-workbench-community:password-manager-service :password-manager-service
+
+	# Retry to open a connection
+
+	# To protect ourself from the following error
+	# Access denied for user 'root'@'localhost'
+	SELECT user,authentication_string,plugin,host FROM mysql.user;
+	ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
+	FLUSH PRIVILEGES;
+	exit;
 }
 function update_mysql_policy() {
 	echo "RUNNING UPDATE MYSQL POLICY REQUIREMENT"
@@ -58,25 +87,6 @@ function update_mysql_policy() {
 	ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
 	FLUSH PRIVILEGES;
 	exit;
-
-
-	# To protect ourself from the following error
-	# An AppArmor policy prevents this sender from sending this message to this recipient;
-	# type="method_call", sender=":1.125" (uid=1000 pid=7944 comm="/snap/mysql-workbench-community/5/usr/bin/mysql- wo"
-	# label="snap.mysql-workbench-community.mysql-workbench- community (enforce)")
-	# interface="org.freedesktop.Secret.Service" member="OpenSession” error name="(unset)"
-	# requested_reply="0" destination=":1.13" (uid=1000 pid=2044 comm="/usr/bin/gnome-
-	# keyring-daemon –daemonize –login" label="unconfined")
-	# source: https://askubuntu.com/questions/1144497/how-to-disable-apparmor-for-mysql
-	# source: https://superuser.com/questions/282115/how-to-restart-mysql
-	# sudo /etc/init.d/mysql stop
-	# sudo ln -s /etc/apparmor.d/usr.sbin.mysqld /etc/apparmor.d/disable/
-	# sudo apparmor_parser -R /etc/apparmor.d/usr.sbin.mysqld
-	# sudo /etc/init.d/mysql restart
-	# sudo /etc/init.d/mysql status
-	# BEST SOLUTION
-	# source: https://itectec.com/ubuntu/ubuntu-cannot-connect-mysql-workbench-to-mysql-server/
-	sudo snap connect mysql-workbench-community:password-manager-service :password-manager-service
 }
 function create_a_new_database_user() {
 	echo "CREATING A NEW USER"
