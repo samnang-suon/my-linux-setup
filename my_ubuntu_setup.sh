@@ -195,15 +195,17 @@ function install_java() {
 #	source: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04
 ###################################################################################################
 function install_docker_ce() {
-	sudo apt-get update
+	printf "\n\n"
+	echo "================================================================================"
+	echo "============================== Installing DOCKER ==============================="
+	echo "================================================================================"
 	sudo apt install apt-transport-https ca-certificates curl software-properties-common --yes
 	curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 	sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
 	sudo apt update
 	apt-cache policy docker-ce
 	sudo apt install docker-ce
-	sudo systemctl status docker
-	docker --version
+	# sudo systemctl status docker
 }
 
 
@@ -482,6 +484,9 @@ main() {
 	sudo apt install mysql-server --yes
 
 
+	install_docker_ce
+
+
 	echo "================================================================================"
 	echo "============================== LIST SOFTWARE VERSION ==========================="
 	echo "================================================================================"
@@ -493,6 +498,8 @@ main() {
 	node --version
 	printf "\n\n>>> NPM:\n"
     npm --version
+    printf "\n\n>>> DOCKER:\n"
+    docker --version
 
 
 	echo "================================================================================"
@@ -502,6 +509,3 @@ main() {
 	lsb_release -a
 }
 main "$@"
-
-
-
