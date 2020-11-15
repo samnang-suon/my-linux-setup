@@ -1,3 +1,15 @@
+#!/bin/bash
+
+function update_ubuntu() {
+	echo "================================================================================"
+	echo "============================== UPDATE UBUNTU ==================================="
+	echo "================================================================================"
+	sudo apt update --yes &&
+	sudo apt upgrade --yes &&
+	sudo apt autoremove --yes
+}
+
+
 ###################################################################################################
 #	MOST TUTORIALS COME FROM:
 # 	https://www.digitalocean.com/community/tags/ubuntu-18-04
@@ -21,6 +33,35 @@ function connect_to_mysql_database() {
 function install_mysql_workbench() {
 	echo "To install MYSQL WORKBENCH"
 	echo "Go to Ubuntu App Store (Ubuntu Software)"
+
+	# Try to open a connection
+
+	# To protect ourself from the following error
+	# An AppArmor policy prevents this sender from sending this message to this recipient;
+	# type="method_call", sender=":1.125" (uid=1000 pid=7944 comm="/snap/mysql-workbench-community/5/usr/bin/mysql- wo"
+	# label="snap.mysql-workbench-community.mysql-workbench- community (enforce)")
+	# interface="org.freedesktop.Secret.Service" member="OpenSession” error name="(unset)"
+	# requested_reply="0" destination=":1.13" (uid=1000 pid=2044 comm="/usr/bin/gnome-
+	# keyring-daemon –daemonize –login" label="unconfined")
+	# source: https://askubuntu.com/questions/1144497/how-to-disable-apparmor-for-mysql
+	# source: https://superuser.com/questions/282115/how-to-restart-mysql
+	# sudo /etc/init.d/mysql stop
+	# sudo ln -s /etc/apparmor.d/usr.sbin.mysqld /etc/apparmor.d/disable/
+	# sudo apparmor_parser -R /etc/apparmor.d/usr.sbin.mysqld
+	# sudo /etc/init.d/mysql restart
+	# sudo /etc/init.d/mysql status
+	# BEST SOLUTION
+	# source: https://itectec.com/ubuntu/ubuntu-cannot-connect-mysql-workbench-to-mysql-server/
+	sudo snap connect mysql-workbench-community:password-manager-service :password-manager-service
+
+	# Retry to open a connection
+
+	# To protect ourself from the following error
+	# Access denied for user 'root'@'localhost'
+	SELECT user,authentication_string,plugin,host FROM mysql.user;
+	ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
+	FLUSH PRIVILEGES;
+	exit;
 }
 function update_mysql_policy() {
 	echo "RUNNING UPDATE MYSQL POLICY REQUIREMENT"
@@ -46,25 +87,6 @@ function update_mysql_policy() {
 	ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
 	FLUSH PRIVILEGES;
 	exit;
-
-
-	# To protect ourself from the following error
-	# An AppArmor policy prevents this sender from sending this message to this recipient;
-	# type="method_call", sender=":1.125" (uid=1000 pid=7944 comm="/snap/mysql-workbench-community/5/usr/bin/mysql- wo"
-	# label="snap.mysql-workbench-community.mysql-workbench- community (enforce)")
-	# interface="org.freedesktop.Secret.Service" member="OpenSession” error name="(unset)"
-	# requested_reply="0" destination=":1.13" (uid=1000 pid=2044 comm="/usr/bin/gnome-
-	# keyring-daemon –daemonize –login" label="unconfined")
-	# source: https://askubuntu.com/questions/1144497/how-to-disable-apparmor-for-mysql
-	# source: https://superuser.com/questions/282115/how-to-restart-mysql
-	# sudo /etc/init.d/mysql stop
-	# sudo ln -s /etc/apparmor.d/usr.sbin.mysqld /etc/apparmor.d/disable/
-	# sudo apparmor_parser -R /etc/apparmor.d/usr.sbin.mysqld
-	# sudo /etc/init.d/mysql restart
-	# sudo /etc/init.d/mysql status
-	# BEST SOLUTION
-	# source: https://itectec.com/ubuntu/ubuntu-cannot-connect-mysql-workbench-to-mysql-server/
-	sudo snap connect mysql-workbench-community:password-manager-service :password-manager-service
 }
 function create_a_new_database_user() {
 	echo "CREATING A NEW USER"
@@ -429,66 +451,24 @@ function manage_expand_virtual_disk() {
 
 
 ###################################################################################################
-# MAIN FUNCTION
-# source: https://unix.stackexchange.com/questions/550771/sourced-bash-script-each-with-main-function
+# AUDIO-VIDEO-RELATED
 ###################################################################################################
-main() {
-	# UPDATE VS UPGRADE
-	# source: https://unix.stackexchange.com/questions/361814/whats-the-difference-between-software-update-and-upgrade
+function install_vlc() {
+	# source: https://www.videolan.org/vlc/download-ubuntu.html
+	printf "\n\n"
 	echo "================================================================================"
-	echo "============================== Running Update =================================="
+	echo "============================== INSTALL VLC ====================================="
 	echo "================================================================================"
-	sudo apt update --yes
+	sudo snap install vlc
+}
 
 
+
+
+function list_software_versions() {
+	printf "\n\n"
 	echo "================================================================================"
-	echo "============================== Running Upgrade ================================="
-	echo "================================================================================"
-	sudo apt upgrade --yes
-
-
-	echo "================================================================================"
-	echo "============================== Installing JAVA ================================="
-	echo "================================================================================"
-	sudo apt install default-jdk --yes
-
-
-	echo "================================================================================"
-	echo "============================== Installing GIT =================================="
-	echo "================================================================================"
-	sudo apt install git --yes
-
-
-	echo "================================================================================"
-	echo "============================== Installing NODE_JS =============================="
-	echo "================================================================================"
-	sudo apt install nodejs --yes
-	sudo apt install npm --yes
-
-
-	echo "================================================================================"
-	echo "============================== Installing INTELLIJ ============================="
-	echo "================================================================================"
-	sudo snap install intellij-idea-community --classic
-
-
-	echo "================================================================================"
-	echo "============================== Installing WEBSTORM ============================="
-	echo "================================================================================"
-	sudo snap install webstorm --classic
-
-
-	echo "================================================================================"
-	echo "============================== Installing MYSQL ================================"
-	echo "================================================================================"
-	sudo apt install mysql-server --yes
-
-
-	install_docker_ce
-
-
-	echo "================================================================================"
-	echo "============================== LIST SOFTWARE VERSION ==========================="
+	echo "============================== SOFTWARE VERSIONS ==============================="
 	echo "================================================================================"
 	printf "\n\n>>> JAVA:\n"
 	java --version
@@ -500,12 +480,80 @@ main() {
     npm --version
     printf "\n\n>>> DOCKER:\n"
     docker --version
+}
 
 
+function update_ubuntu() {
+	# UPDATE VS UPGRADE
+	# source: https://unix.stackexchange.com/questions/361814/whats-the-difference-between-software-update-and-upgrade
+	echo "================================================================================"
+	echo "============================== UPDATE UBUNTU ==================================="
+	echo "================================================================================"
+	sudo apt update --yes &&
+	sudo apt upgrade --yes &&
+	sudo apt autoremove --yes
+}
+
+
+###################################################################################################
+# MAIN FUNCTION
+# source: https://unix.stackexchange.com/questions/550771/sourced-bash-script-each-with-main-function
+###################################################################################################
+main() {
+	update_ubuntu
+
+
+	printf "\n\n"
+	echo "================================================================================"
+	echo "============================== Installing JAVA ================================="
+	echo "================================================================================"
+	sudo apt install default-jdk --yes
+
+
+	printf "\n\n"
+	echo "================================================================================"
+	echo "============================== Installing GIT =================================="
+	echo "================================================================================"
+	sudo apt install git --yes
+
+
+	printf "\n\n"
+	echo "================================================================================"
+	echo "============================== Installing NODE_JS =============================="
+	echo "================================================================================"
+	sudo apt install nodejs --yes
+	sudo apt install npm --yes
+
+
+	printf "\n\n"
+	echo "================================================================================"
+	echo "============================== Installing INTELLIJ ============================="
+	echo "================================================================================"
+	sudo snap install intellij-idea-community --classic
+
+
+	printf "\n\n"
+	echo "================================================================================"
+	echo "============================== Installing WEBSTORM ============================="
+	echo "================================================================================"
+	sudo snap install webstorm --classic
+
+
+	printf "\n\n"
+	echo "================================================================================"
+	echo "============================== Installing MYSQL ================================"
+	echo "================================================================================"
+	sudo apt install mysql-server --yes
+
+
+	install_docker_ce
+	list_software_versions
+
+
+	printf "\n\n"
 	echo "================================================================================"
 	echo "============================== YOUR UBUNTU VERSION ============================="
 	echo "================================================================================"
-	echo ""
 	lsb_release -a
 }
 main "$@"
